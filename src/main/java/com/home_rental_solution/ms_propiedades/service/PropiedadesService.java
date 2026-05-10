@@ -3,7 +3,6 @@ package com.home_rental_solution.ms_propiedades.service;
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -86,5 +85,20 @@ public class PropiedadesService {
             throw new Exception("El precio minimo no puede ser mayor que el precio maximo");
         }
         return propiedadesRepository.findByUbicacionContainingIgnoreCaseAndPrecioBetween(ubicacion, precioMin, precioMax);
+    }
+
+    //GET /propiedades/disponibles
+    public List<Propiedades> mostrarDisponibles(){
+        return propiedadesRepository.findByDisponibleTrue();
+    }
+
+    //PUT /propiedades/estado
+    public Propiedades cambiarEstado(int id) throws Exception{
+        Propiedades propiedad = propiedadesRepository.findById(id).orElse(null);
+        if (propiedad ==  null){
+            throw new Exception("La propiedad con ID: " + id + " no existe");
+        }
+        propiedad.setDisponible(!propiedad.isDisponible());
+        return propiedadesRepository.save(propiedad);
     }
 }

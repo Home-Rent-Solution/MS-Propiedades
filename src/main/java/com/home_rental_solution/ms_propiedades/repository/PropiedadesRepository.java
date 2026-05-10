@@ -26,4 +26,7 @@ public interface PropiedadesRepository extends JpaRepository<Propiedades, Intege
     //Busqueda avanzada: ciudad + rango de precio
     List<Propiedades> findByUbicacionContainingIgnoreCaseAndPrecioBetween(String ubicacion, BigDecimal min, BigDecimal max);
 
+    //Busqueda por disponibilidad
+    List<Propiedades> findByDisponibleTrue();
+
 }

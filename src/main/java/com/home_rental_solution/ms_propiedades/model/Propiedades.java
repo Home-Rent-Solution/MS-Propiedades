@@ -50,4 +50,7 @@ public class Propiedades {
     @Size(max = 50, message = "El tipo no puede superar los 50 caracteres")
     @Column(nullable = false, length = 50)
     private String tipo;
+
+    @Column(nullable = false)
+    private boolean disponible;
 }
