@@ -33,7 +33,7 @@ public class PropiedadesService {
         return propiedadesRepository.save(nuevaPropiedad);
     }
 
-    //PUT /propiedades/id
+    //PUT /propiedades/Id
     public Propiedades editar(int id, Propiedades propiedadEditada) throws Exception{
         Propiedades propiedadExistente = propiedadesRepository.findById(id).orElse(null);
         if (propiedadExistente == null){
