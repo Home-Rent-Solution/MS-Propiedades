@@ -2,76 +2,89 @@ package com.home_rental_solution.ms_propiedades.service;
 
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.math.BigDecimal;
 
 @Service
+@RequiredArgsConstructor
 public class PropiedadesService {
 
-    @Autowired
-    private PropiedadesRepository propiedadesRepository;
+    private final PropiedadesRepository propiedadesRepository;
 
     //***CRUD***
     //GET /propiedades
-    public List<Propiedades> getPropiedades(){
-        return propiedadesRepository.obtenerPropiedades();
+    public List<Propiedades> mostrarPropiedades(){
+        return propiedadesRepository.findAll();
     }
 
     //GET /propiedades/id
-    public Propiedades getPorId(int id){
-        return propiedadesRepository.buscarPorId(id);
+    public Propiedades mostrarPorId(int id){
+        return propiedadesRepository.findById(id).orElse(null);
     }
 
     //POST /propiedades
     public Propiedades save (Propiedades nuevaPropiedad) throws Exception{
-        if (nuevaPropiedad.getPrecio() <= 0){
+        if (nuevaPropiedad.getPrecio() == null || nuevaPropiedad.getPrecio().compareTo(BigDecimal.ZERO) <= 0){
             throw new Exception("El precio debe ser mayor a 0");
         }
-        return propiedadesRepository.guardar(nuevaPropiedad);
+        return propiedadesRepository.save(nuevaPropiedad);
     }
 
     //PUT /propiedades/id
     public Propiedades editar(int id, Propiedades propiedadEditada) throws Exception{
-        Propiedades propiedadExistente = propiedadesRepository.buscarPorId(id);
+        Propiedades propiedadExistente = propiedadesRepository.findById(id).orElse(null);
         if (propiedadExistente == null){
-            throw new Exception("La propiedad con ID " + id + " no existe");
+            throw new Exception("La propiedad con ID: " + id + " no existe");
         }
-        if (propiedadEditada.getPrecio() <= 0){
+        if (propiedadEditada.getPrecio() == null || propiedadEditada.getPrecio().compareTo(BigDecimal.ZERO) <= 0){
             throw  new Exception("El precio debe ser mayor a 0");
         }
         propiedadEditada.setIdPropiedad(id);
-        return propiedadesRepository.actualizar(propiedadEditada);
+        return propiedadesRepository.save(propiedadEditada);
     }
 
     // DELETE /propiedad/id
     public void borrar (int id) throws Exception{
-        if (propiedadesRepository.buscarPorId(id) == null){
-            throw new Exception("La propiedad con ID " + id + " no existe");
+        if (!propiedadesRepository.existsById(id)){
+            throw new Exception("La propiedad con ID: " + id + " no existe");
         }
-        propiedadesRepository.eliminar(id);
+        propiedadesRepository.deleteById(id);
     }
 
     //***EXTRAS***
     //GET /propiedades/usuario/id
-    public List<Propiedades> getPorAnfitrion(int idAnfitrion){
-        return propiedadesRepository.buscarPorAnfitrion(idAnfitrion);
+    public List<Propiedades> mostrarPorAnfitrion(int idAnfitrion){
+        return propiedadesRepository.findByIdAnfitrion(idAnfitrion);
     }
 
     //GET /propiedades/precio
-    public List<Propiedades> getPorPrecio(int min, int max) throws Exception{
-        if (min < 0 || max < 0){
+    public List<Propiedades> mostrarPorPrecio(BigDecimal min, BigDecimal max) throws Exception{
+        if (min.compareTo(BigDecimal.ZERO) < 0 || max.compareTo(BigDecimal.ZERO) < 0){
             throw new Exception("Los valores de precio no pueden ser negativos");
         }
-        if (min > max){
+        if (min.compareTo(max) > 0){
             throw  new Exception("El precio minimo no puede ser mayor que el precio maximo");
         }
-        return propiedadesRepository.buscarPorPrecio(min, max);
+        return propiedadesRepository.findByPrecioBetween(min, max);
     }
 
     //GET /propiedades/tipo
-    public List<Propiedades> getPorTipo(String tipo){
-        return propiedadesRepository.buscarPorTipo(tipo);
+    public List<Propiedades> mostrarPorTipo(String tipo){
+        return propiedadesRepository.findByTipoIgnoreCase(tipo);
+    }
+
+    //GET /propiedades/buscar?ubicacion=&precioMin=&precioMax=
+    public List<Propiedades> mostrarUbicacionPrecio(String ubicacion, BigDecimal precioMin, BigDecimal precioMax) throws Exception{
+        if (precioMin.compareTo(BigDecimal.ZERO) < 0 || precioMax.compareTo(BigDecimal.ZERO) < 0){
+            throw new Exception("Los valores de precio no pueden ser negativos");
+        }
+        if (precioMin.compareTo(precioMax) > 0){
+            throw new Exception("El precio minimo no puede ser mayor que el precio maximo");
+        }
+        return propiedadesRepository.findByUbicacionContainingIgnoreCaseAndPrecioBetween(ubicacion, precioMin, precioMax);
     }
 }
