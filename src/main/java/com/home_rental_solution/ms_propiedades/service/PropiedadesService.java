@@ -14,7 +14,7 @@ public class PropiedadesService {
 
     private final PropiedadesRepository propiedadesRepository;
 
-    //***CRUD***
+    //***CRUD**
     //GET /propiedades
     public List<Propiedades> mostrarPropiedades(){
         return propiedadesRepository.findAll();
