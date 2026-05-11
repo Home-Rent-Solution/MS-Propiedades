@@ -43,6 +43,7 @@ public class PropiedadesService {
             throw  new Exception("El precio debe ser mayor a 0");
         }
         propiedadEditada.setIdPropiedad(id);
+        propiedadEditada.setDisponible(propiedadExistente.isDisponible());
         return propiedadesRepository.save(propiedadEditada);
     }
 
@@ -62,8 +63,8 @@ public class PropiedadesService {
 
     //GET /propiedades/precio
     public List<Propiedades> mostrarPorPrecio(BigDecimal min, BigDecimal max) throws Exception{
-        if (min.compareTo(BigDecimal.ZERO) < 0 || max.compareTo(BigDecimal.ZERO) < 0){
-            throw new Exception("Los valores de precio no pueden ser negativos");
+        if (min == null || max == null){
+            throw new Exception("Debe ingresar ambos valores de precio");
         }
         if (min.compareTo(max) > 0){
             throw  new Exception("El precio minimo no puede ser mayor que el precio maximo");
@@ -72,14 +73,14 @@ public class PropiedadesService {
     }
 
     //GET /propiedades/tipo
-    public List<Propiedades> mostrarPorTipo(String tipo){
-        return propiedadesRepository.findByTipoIgnoreCase(tipo);
+    public List<Propiedades> mostrarPorTipo(Propiedades.TipoPropiedad tipo){
+        return propiedadesRepository.findByTipo(tipo);
     }
 
     //GET /propiedades/buscar?ubicacion=&precioMin=&precioMax=
     public List<Propiedades> mostrarUbicacionPrecio(String ubicacion, BigDecimal precioMin, BigDecimal precioMax) throws Exception{
-        if (precioMin.compareTo(BigDecimal.ZERO) < 0 || precioMax.compareTo(BigDecimal.ZERO) < 0){
-            throw new Exception("Los valores de precio no pueden ser negativos");
+        if (precioMin == null || precioMax == null){
+            throw new Exception("Debe ingresar ambos valores de precio");
         }
         if (precioMin.compareTo(precioMax) > 0){
             throw new Exception("El precio minimo no puede ser mayor que el precio maximo");
