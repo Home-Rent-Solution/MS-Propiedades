@@ -18,6 +18,13 @@ import java.math.BigDecimal;
 @Table(name = "propiedades")
 public class Propiedades {
 
+    public enum TipoPropiedad{
+        casa,
+        departamento,
+        terreno,
+        estudio
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPropiedad;
@@ -27,7 +34,7 @@ public class Propiedades {
     @Column(nullable = false, length = 200)
     private String titulo;
 
-    @NotBlank(message = "La descriocion es obligatoria")
+    @NotBlank(message = "La descripcion es obligatoria")
     @Size(max = 500, message = "La descripcion no puede superar los 500 caracteres")
     @Column(nullable = false, length = 500)
     private String descripcion;
@@ -39,17 +46,17 @@ public class Propiedades {
 
     @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser mayor a cero")
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
     @NotNull(message = "El ID del anfitrion es obligatorio")
-    @Column(nullable = false)
+    @Column(name = "id_anfitrion", nullable = false)
     private Integer idAnfitrion;
 
-    @NotBlank(message = "El tipo de propiedad es obligatorio")
-    @Size(max = 50, message = "El tipo no puede superar los 50 caracteres")
+    @NotNull(message = "El tipo de propiedad es obligatorio")
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
-    private String tipo;
+    private TipoPropiedad tipo;
 
     @Column(nullable = false)
     private boolean disponible;
