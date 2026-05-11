@@ -73,7 +73,7 @@ public class PropiedadesController {
     }
 
     //***EXTRAS***
-    //GET /propiedaes/id/anfitrion
+    //GET /propiedades/id/anfitrion
     @GetMapping("/anfitrion/{idAnfitrion}")
     public ResponseEntity<List<Propiedades>> getPorAnfitrion(@PathVariable int idAnfitrion){
         return ResponseEntity.ok(propiedadesService.mostrarPorAnfitrion(idAnfitrion));
@@ -91,7 +91,7 @@ public class PropiedadesController {
 
     //GET /propiedades/tipo
     @GetMapping("/tipo/{tipo}")
-    public ResponseEntity<List<Propiedades>> getPorTipo(@PathVariable String tipo){
+    public ResponseEntity<List<Propiedades>> getPorTipo(@PathVariable Propiedades.TipoPropiedad tipo){
         return ResponseEntity.ok(propiedadesService.mostrarPorTipo(tipo));
     }
 
@@ -110,6 +110,17 @@ public class PropiedadesController {
             return ResponseEntity.ok(propiedadesService.mostrarUbicacionPrecio(ubicacion, precioMin, precioMax));
         } catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    //PUT /propiedades/estado--para cambiar el estado
+    @PutMapping("{id}/estado")
+    public ResponseEntity<?> cambiarEstado(@PathVariable int id){
+        try{
+            Propiedades propiedad = propiedadesService.cambiarEstado(id);
+            return ResponseEntity.ok(propiedad);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
