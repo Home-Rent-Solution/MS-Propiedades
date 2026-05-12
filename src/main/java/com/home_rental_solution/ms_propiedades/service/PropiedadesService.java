@@ -121,7 +121,7 @@ public class PropiedadesService {
         return propiedadesRepository.findByDisponibleTrue().stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
-    //PUT /propiedades/id/estado
+    //PUT /propiedades/id/estad
     public PropiedadesResponseDTO cambiarEstado(int id){
         Propiedades propiedad = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La propiedad " +
                 "con ID: " + id + " no existe"));
