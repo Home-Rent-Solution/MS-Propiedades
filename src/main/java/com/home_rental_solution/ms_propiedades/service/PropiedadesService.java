@@ -53,7 +53,7 @@ public class PropiedadesService {
         );
     }
 
-    //Validacion con Feign
+    //Validacion con FeignClient
     private void validarAnfitrion(int idAnfitrion){
         try{
             boolean verificado = anfitrionClient.validarAnfitrion(idAnfitrion);
