@@ -29,7 +29,7 @@ public class PropiedadesController {
 
     //GET /propiedades/id
     @GetMapping("{id}")
-    public ResponseEntity<PropiedadesResponseDTO> getPorId(@PathVariable int id) {
+    public ResponseEntity<PropiedadesResponseDTO> getPorId(@PathVariable Long id) {
         return ResponseEntity.ok(propiedadesService.mostrarPorId(id));
     }
 
@@ -41,13 +41,13 @@ public class PropiedadesController {
 
     //PUT /propiedades/id
     @PutMapping("{id}")
-    public ResponseEntity<PropiedadesResponseDTO> putPropiedad(@PathVariable int id, @Valid @RequestBody PropiedadesRequestDTO dto) {
+    public ResponseEntity<PropiedadesResponseDTO> putPropiedad(@PathVariable Long id, @Valid @RequestBody PropiedadesRequestDTO dto) {
         return ResponseEntity.ok(propiedadesService.editar(id, dto));
     }
 
     //DELETE /propiedades/id
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> deletePropiedad(@PathVariable int id) {
+    public ResponseEntity<Void> deletePropiedad(@PathVariable Long id) {
         propiedadesService.borrar(id);
         return ResponseEntity.noContent().build();
     }
@@ -55,7 +55,7 @@ public class PropiedadesController {
     //***EXTRAS***
     //GET /propiedades/id/anfitrion
     @GetMapping("/anfitrion/{idAnfitrion}")
-    public ResponseEntity<List<PropiedadesResponseDTO>> getPorAnfitrion(@PathVariable int idAnfitrion) {
+    public ResponseEntity<List<PropiedadesResponseDTO>> getPorAnfitrion(@PathVariable Long idAnfitrion) {
         return ResponseEntity.ok(propiedadesService.mostrarPorAnfitrion(idAnfitrion));
     }
 
@@ -88,7 +88,7 @@ public class PropiedadesController {
 
     //PUT /propiedades/estado--para cambiar el estado
     @PutMapping("{id}/estado")
-    public ResponseEntity<PropiedadesResponseDTO> cambiarEstado(@PathVariable int id) {
+    public ResponseEntity<PropiedadesResponseDTO> cambiarEstado(@PathVariable Long id) {
         return ResponseEntity.ok(propiedadesService.cambiarEstado(id));
     }
 }

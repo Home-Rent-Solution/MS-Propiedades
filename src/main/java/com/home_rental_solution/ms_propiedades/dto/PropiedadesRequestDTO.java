@@ -37,7 +37,7 @@ public class PropiedadesRequestDTO {
     private BigDecimal precio;
 
     @NotNull(message = "El id del anfitrion es obligatorio")
-    private Integer idAnfitrion;
+    private Long idAnfitrion;
 
     @NotNull(message = "El tipo de propiedad es obligatorio")
     private TipoPropiedad tipo;

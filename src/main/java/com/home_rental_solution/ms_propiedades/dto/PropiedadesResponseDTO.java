@@ -12,12 +12,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class PropiedadesResponseDTO {
 
-    private Integer id;
+    private Long id;
     private String nombre;
     private String descripcion;
     private String ubicacion;
     private BigDecimal precio;
-    private Integer idAnfitrion;
+    private Long idAnfitrion;
     private Propiedades.TipoPropiedad tipo;
     private boolean disponible;
 }

@@ -10,5 +10,5 @@ public interface AnfitrionClient {
     //GET /anfitriones/id/validar
     //devuelve true si el anfitrion esta verificado
     @GetMapping("/api/v1/anfitriones/{id}/validar")
-    boolean validarAnfitrion(@PathVariable int id);
+    boolean validarAnfitrion(@PathVariable Long id);
 }
