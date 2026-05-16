@@ -30,7 +30,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Departamento con 2 dormitorios y 1 baño",
                 "Santiago Centro",
                 new BigDecimal("45000000"),
-                1,
+                1L,
                 Propiedades.TipoPropiedad.departamento,
                 true
         ));propiedadesRepository.save(new Propiedades(
@@ -39,7 +39,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Casa de 5 dormitorios cercana al metro",
                 "Providencia",
                 new BigDecimal("345000000"),
-                1,
+                1L,
                 Propiedades.TipoPropiedad.casa,
                 true
         ));propiedadesRepository.save(new Propiedades(
@@ -48,7 +48,7 @@ public class DataInitializer implements CommandLineRunner {
                 "Casa con 3 dormitorios, patio y estacionamiento",
                 "Maipú",
                 new BigDecimal("78000000"),
-                2,
+                2L,
                 Propiedades.TipoPropiedad.terreno,
                 true
         ));
