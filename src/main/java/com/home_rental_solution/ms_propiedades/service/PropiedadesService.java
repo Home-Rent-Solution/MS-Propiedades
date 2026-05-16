@@ -54,7 +54,7 @@ public class PropiedadesService {
     }
 
     //Validacion con FeignClients
-    private void validarAnfitrion(int idAnfitrion){
+    private void validarAnfitrion(Long idAnfitrion){
         try{
             boolean verificado = anfitrionClient.validarAnfitrion(idAnfitrion);
             log.info(">>> Anfitrion {} validado correctamente (Feign Client)", idAnfitrion);
@@ -75,7 +75,7 @@ public class PropiedadesService {
     }
 
     //GET /propiedades/id
-    public PropiedadesResponseDTO mostrarPorId(int id){
+    public PropiedadesResponseDTO mostrarPorId(Long id){
         Propiedades propiedad = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La propiedad " +
                 "con ID: " + id + " no existe"));
         return mapToDTO(propiedad);
@@ -88,7 +88,7 @@ public class PropiedadesService {
     }
 
     //PUT /propiedades/Id
-    public PropiedadesResponseDTO editar(Integer id, PropiedadesRequestDTO dto) {
+    public PropiedadesResponseDTO editar(Long id, PropiedadesRequestDTO dto) {
         Propiedades propiedadExistente = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La " +
                 "propiedad con ID: " + id + " no existe"));
         propiedadExistente.setTitulo(dto.getNombre());
@@ -102,7 +102,7 @@ public class PropiedadesService {
     }
 
     // DELETE /propiedad/id
-    public void borrar (int id){
+    public void borrar (Long id){
         if (!propiedadesRepository.existsById(id)){
             throw new RuntimeException("La propiedad con ID: " + id + " no existe");
         }
@@ -111,7 +111,7 @@ public class PropiedadesService {
 
     //***EXTRAS***
     //GET /propiedades/anfitrion/id
-    public List<PropiedadesResponseDTO> mostrarPorAnfitrion(int idAnfitrion){
+    public List<PropiedadesResponseDTO> mostrarPorAnfitrion(Long idAnfitrion){
         return propiedadesRepository.findByIdAnfitrion(idAnfitrion).stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
@@ -145,7 +145,7 @@ public class PropiedadesService {
     }
 
     //PUT /propiedades/id/estad
-    public PropiedadesResponseDTO cambiarEstado(int id){
+    public PropiedadesResponseDTO cambiarEstado(Long id){
         Propiedades propiedad = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La propiedad " +
                 "con ID: " + id + " no existe"));
         propiedad.setDisponible(!propiedad.isDisponible());

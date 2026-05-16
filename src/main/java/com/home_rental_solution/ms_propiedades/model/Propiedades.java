@@ -23,7 +23,7 @@ public class Propiedades {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idPropiedad;
+    private Long idPropiedad;
 
     @Column(nullable = false, length = 200)
     private String titulo;
@@ -38,7 +38,7 @@ public class Propiedades {
     private BigDecimal precio;
 
     @Column(name = "id_anfitrion", nullable = false)
-    private Integer idAnfitrion;
+    private Long idAnfitrion;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)

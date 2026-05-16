@@ -11,11 +11,11 @@ import java.util.List;
 import java.math.BigDecimal;
 
 @Repository
-public interface PropiedadesRepository extends JpaRepository<Propiedades, Integer> {
+public interface PropiedadesRepository extends JpaRepository<Propiedades, Long> {
 
     //***EXTRAS***
     //Buscar propiedades por Anfitrion*
-    List<Propiedades> findByIdAnfitrion(Integer idAnfitrion);
+    List<Propiedades> findByIdAnfitrion(Long idAnfitrion);
 
     //Buscar propiedades por rango de precio
     @Query("SELECT p FROM Propiedades p WHERE p.precio BETWEEN :min AND :max ORDER BY p.precio")
