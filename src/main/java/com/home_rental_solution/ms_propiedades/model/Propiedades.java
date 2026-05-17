@@ -34,7 +34,7 @@ public class Propiedades {
     @Column(nullable = false, length = 150)
     private String ubicacion;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal precio;
 
     @Column(name = "id_anfitrion", nullable = false)
