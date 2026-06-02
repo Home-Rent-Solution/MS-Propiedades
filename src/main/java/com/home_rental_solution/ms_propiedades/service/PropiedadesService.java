@@ -91,6 +91,7 @@ public class PropiedadesService {
     public PropiedadesResponseDTO editar(Long id, PropiedadesRequestDTO dto) {
         Propiedades propiedadExistente = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La " +
                 "propiedad con ID: " + id + " no existe"));
+        validarAnfitrion(dto.getIdAnfitrion());
         propiedadExistente.setTitulo(dto.getNombre());
         propiedadExistente.setDescripcion(dto.getDescripcion());
         propiedadExistente.setUbicacion(dto.getUbicacion());
