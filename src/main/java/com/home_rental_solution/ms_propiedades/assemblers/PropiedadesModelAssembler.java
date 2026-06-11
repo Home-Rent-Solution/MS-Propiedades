@@ -1,6 +1,6 @@
 package com.home_rental_solution.ms_propiedades.assemblers;
 
-import com.home_rental_solution.ms_propiedades.controller.PropiedadesController;
+import com.home_rental_solution.ms_propiedades.controller.PropiedadesControllerV2;
 import com.home_rental_solution.ms_propiedades.dto.PropiedadesResponseDTO;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -18,17 +18,17 @@ public class PropiedadesModelAssembler implements RepresentationModelAssembler<P
         return EntityModel.of(
                 dto,
                 //enlace al recurso individual
-                linkTo(methodOn(PropiedadesController.class)
+                linkTo(methodOn(PropiedadesControllerV2.class)
                         .getPorId(dto.getId()))
                         .withSelfRel(),
 
                 //Enlace al listado completo de propiedades
-                linkTo(methodOn(PropiedadesController.class)
+                linkTo(methodOn(PropiedadesControllerV2.class)
                         .getTodas())
                         .withRel("propiedades"),
 
                 //Enlace extra dinamico para conmutar su estado de disponibilidad
-                linkTo(methodOn(PropiedadesController.class)
+                linkTo(methodOn(PropiedadesControllerV2.class)
                         .cambiarEstado(dto.getId()))
                         .withRel("cambiar-estado")
                 );
