@@ -19,7 +19,10 @@ public interface PropiedadesRepository extends JpaRepository<Propiedades, Long> 
 
     //Buscar propiedades por rango de precio
     @Query("SELECT p FROM Propiedades p WHERE p.precio BETWEEN :min AND :max ORDER BY p.precio")
-    List<Propiedades> findByPrecioBetween(@Param ("min") BigDecimal min, @Param ("max") BigDecimal max);
+    List<Propiedades> findByPrecioBetween(
+            @Param ("min") BigDecimal min,
+            @Param ("max") BigDecimal max
+    );
 
     //Buscar por tipo de propiedad*
     List<Propiedades> findByTipo (TipoPropiedad tipo);
@@ -31,9 +34,11 @@ public interface PropiedadesRepository extends JpaRepository<Propiedades, Long> 
     //Busqueda avanzada: ciudad + rango de precio
     @Query("SELECT p FROM Propiedades p WHERE LOWER(p.ubicacion) LIKE LOWER (CONCAT('%', :ubicacion, '%'))" + "AND " +
             "p.precio BETWEEN :min AND :max ORDER BY p.precio")
-    List<Propiedades> findByUbicacionContainingIgnoreCaseAndPrecioBetween(@Param ("ubicacion") String ubicacion,
-                                                                          @Param ("min") BigDecimal min,
-                                                                          @Param ("max") BigDecimal max);
+    List<Propiedades> findByUbicacionContainingIgnoreCaseAndPrecioBetween(
+            @Param ("ubicacion") String ubicacion,
+            @Param ("min") BigDecimal min,
+            @Param ("max") BigDecimal max
+    );
     //Busqueda por disponibilidad*
     List<Propiedades> findByDisponibleTrue();
 }

@@ -22,7 +22,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.math.BigDecimal;
 import java.util.stream.Collectors;
@@ -65,7 +64,7 @@ public class PropiedadesControllerV2 {
                 .mostrarPropiedades()
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades,linkTo(methodOn(PropiedadesControllerV2.class).getTodas()).withSelfRel());
     }
 
@@ -229,7 +228,7 @@ public class PropiedadesControllerV2 {
                 .mostrarPorAnfitrion(idAnfitrion)
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades);
     }
 
@@ -270,7 +269,7 @@ public class PropiedadesControllerV2 {
                 .mostrarPorPrecio(min, max)
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades);
     }
 
@@ -304,7 +303,7 @@ public class PropiedadesControllerV2 {
                 .mostrarPorTipo(tipo)
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades);
     }
 
@@ -333,7 +332,7 @@ public class PropiedadesControllerV2 {
                 .mostrarDisponibles()
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades);
     }
 
@@ -378,7 +377,7 @@ public class PropiedadesControllerV2 {
                 .mostrarUbicacionPrecio(ubicacion, precioMin, precioMax)
                 .stream()
                 .map(assembler::toModel)
-                .toList();
+                .collect(Collectors.toList());
         return CollectionModel.of(propiedades);
     }
 
@@ -405,7 +404,8 @@ public class PropiedadesControllerV2 {
             @ApiResponse(
                     responseCode = "400",
                     description = "El ID proporcionado no corresponde a ninguna propiedad activa",
-                    content = @Content)
+                    content = @Content
+            )
     })
     public ResponseEntity<EntityModel<PropiedadesResponseDTO>> cambiarEstado(
             @Parameter(

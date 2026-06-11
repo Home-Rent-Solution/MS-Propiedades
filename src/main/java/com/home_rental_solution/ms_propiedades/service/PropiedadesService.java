@@ -57,7 +57,10 @@ public class PropiedadesService {
     private void validarAnfitrion(Long idAnfitrion){
         try{
             boolean verificado = anfitrionClient.validarAnfitrion(idAnfitrion);
-            log.info(">>> Anfitrion {} validado correctamente (Feign Client)", idAnfitrion);
+            log.info(
+                    ">>> Anfitrion {} validado correctamente (Feign Client)",
+                    idAnfitrion
+            );
             if (!verificado){
                 throw  new RuntimeException("El anfitrion con ID: " + idAnfitrion + " no esta verificado");
             }
@@ -71,13 +74,18 @@ public class PropiedadesService {
     //***CRUD**
     //GET /propiedades
     public List<PropiedadesResponseDTO> mostrarPropiedades(){
-        return propiedadesRepository.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+        return propiedadesRepository
+                .findAll()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //GET /propiedades/id
     public PropiedadesResponseDTO mostrarPorId(Long id){
-        Propiedades propiedad = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La propiedad " +
-                "con ID: " + id + " no existe"));
+        Propiedades propiedad = propiedadesRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("La propiedad con ID: " + id + " no existe"));
         return mapToDTO(propiedad);
     }
 
@@ -89,8 +97,9 @@ public class PropiedadesService {
 
     //PUT /propiedades/Id
     public PropiedadesResponseDTO editar(Long id, PropiedadesRequestDTO dto) {
-        Propiedades propiedadExistente = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La " +
-                "propiedad con ID: " + id + " no existe"));
+        Propiedades propiedadExistente = propiedadesRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("La propiedad con ID: " + id + " no existe"));
         validarAnfitrion(dto.getIdAnfitrion());
         propiedadExistente.setTitulo(dto.getNombre());
         propiedadExistente.setDescripcion(dto.getDescripcion());
@@ -113,42 +122,71 @@ public class PropiedadesService {
     //***EXTRAS***
     //GET /propiedades/anfitrion/id
     public List<PropiedadesResponseDTO> mostrarPorAnfitrion(Long idAnfitrion){
-        return propiedadesRepository.findByIdAnfitrion(idAnfitrion).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return propiedadesRepository
+                .findByIdAnfitrion(idAnfitrion)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //GET /propiedades/precio
-    public List<PropiedadesResponseDTO> mostrarPorPrecio(BigDecimal min, BigDecimal max){
+    public List<PropiedadesResponseDTO> mostrarPorPrecio(
+            BigDecimal min,
+            BigDecimal max
+    ){
         if (min.compareTo(max) > 0){
             throw new RuntimeException("El precio minimo no puede ser mayor que el maximo");
         }
-        return propiedadesRepository.findByPrecioBetween(min, max).stream().map(this::mapToDTO).collect(Collectors
-                .toList());
+        return propiedadesRepository
+                .findByPrecioBetween(min, max)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //GET /propiedades/tipo
     public List<PropiedadesResponseDTO> mostrarPorTipo(Propiedades.TipoPropiedad tipo){
-        return propiedadesRepository.findByTipo(tipo).stream().map(this::mapToDTO).collect(Collectors.toList());
+        return propiedadesRepository
+                .findByTipo(tipo)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //GET /propiedades/buscar?ubicacion=&precioMin=&precioMax=
-    public List<PropiedadesResponseDTO> mostrarUbicacionPrecio(String ubicacion, BigDecimal precioMin,
-                                                               BigDecimal precioMax){
+    public List<PropiedadesResponseDTO> mostrarUbicacionPrecio(
+            String ubicacion,
+            BigDecimal precioMin,
+            BigDecimal precioMax
+    ){
         if (precioMin.compareTo(precioMax) > 0){
             throw new RuntimeException("El precio minimo no debe ser mayor que el maximo");
         }
-        return propiedadesRepository.findByUbicacionContainingIgnoreCaseAndPrecioBetween(ubicacion, precioMin, precioMax)
-                .stream().map(this::mapToDTO).collect(Collectors.toList());
+        return propiedadesRepository
+                .findByUbicacionContainingIgnoreCaseAndPrecioBetween(
+                        ubicacion,
+                        precioMin,
+                        precioMax
+                )
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //GET /propiedades/disponibles
     public List<PropiedadesResponseDTO> mostrarDisponibles(){
-        return propiedadesRepository.findByDisponibleTrue().stream().map(this::mapToDTO).collect(Collectors.toList());
+        return propiedadesRepository
+                .findByDisponibleTrue()
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     //PUT /propiedades/id/estad
     public PropiedadesResponseDTO cambiarEstado(Long id){
-        Propiedades propiedad = propiedadesRepository.findById(id).orElseThrow(() -> new RuntimeException("La propiedad " +
-                "con ID: " + id + " no existe"));
+        Propiedades propiedad = propiedadesRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("La propiedad con ID: " + id + " no existe"));
         propiedad.setDisponible(!propiedad.isDisponible());
         return mapToDTO(propiedadesRepository.save(propiedad));
     }

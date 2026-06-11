@@ -25,23 +25,42 @@ public class Propiedades {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPropiedad;
 
-    @Column(nullable = false, length = 200)
+    @Column(
+            nullable = false,
+            length = 200
+    )
     private String titulo;
 
-    @Column(nullable = false, length = 500)
+    @Column
+            (nullable = false,
+                    length = 500
+            )
     private String descripcion;
 
-    @Column(nullable = false, length = 150)
+    @Column(
+            nullable = false,
+            length = 150
+    )
     private String ubicacion;
 
-    @Column(nullable = false, precision = 12, scale = 2)
+    @Column(
+            nullable = false,
+            precision = 12,
+            scale = 2
+    )
     private BigDecimal precio;
 
-    @Column(name = "id_anfitrion", nullable = false)
+    @Column(
+            name = "id_anfitrion",
+            nullable = false
+    )
     private Long idAnfitrion;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 50)
+    @Column(
+            nullable = false,
+            length = 50
+    )
     private TipoPropiedad tipo;
 
     @Column(nullable = false)
