@@ -21,15 +21,24 @@ public class PropiedadesRequestDTO {
     //disponible no se incluye porque se maneja con PUT
 
     @NotBlank(message = "El nombre es obligatorio")
-    @Size(max = 150, message = "El nombre no puede superar los 150 caracteres")
+    @Size(
+            max = 150,
+            message = "El nombre no puede superar los 150 caracteres"
+    )
     private String nombre;
 
     @NotBlank(message = "La descripcion es obligatoria")
-    @Size(max = 500, message = "La descripcion no puede superar los 500 caracteres")
+    @Size(
+            max = 500,
+            message = "La descripcion no puede superar los 500 caracteres"
+    )
     private String descripcion;
 
     @NotBlank(message = "La ubicacion es obligatoria")
-    @Size(max = 200, message = "La ubicacion no puede superar los 200 caracteres")
+    @Size(
+            max = 200,
+            message = "La ubicacion no puede superar los 200 caracteres"
+    )
     private String ubicacion;
 
     @NotNull(message = "El precio es obligatorio")

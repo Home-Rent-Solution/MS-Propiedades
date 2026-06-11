@@ -4,7 +4,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name="ms-anfitriones", url ="${ms.anfitriones.url}")
+@FeignClient(
+        name="ms-anfitriones",
+        url ="${ms.anfitriones.url}"
+)
 public interface AnfitrionClient {
 
     //GET /anfitriones/id/validar

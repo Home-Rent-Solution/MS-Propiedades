@@ -10,7 +10,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class PropiedadesModelAssembler implements RepresentationModelAssembler<PropiedadesResponseDTO, EntityModel<PropiedadesResponseDTO>> {
+public class PropiedadesModelAssembler implements RepresentationModelAssembler<PropiedadesResponseDTO,
+        EntityModel<PropiedadesResponseDTO>> {
 
     @Override
     public EntityModel<PropiedadesResponseDTO> toModel (PropiedadesResponseDTO dto){

@@ -11,7 +11,9 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(
+            MethodArgumentNotValidException.class
+    )
     public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex){
         Map<String, String> errores = new LinkedHashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(error -> errores.put(error.getField(),
