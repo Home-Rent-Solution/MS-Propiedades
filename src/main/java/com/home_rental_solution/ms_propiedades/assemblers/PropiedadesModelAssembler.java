@@ -15,15 +15,22 @@ public class PropiedadesModelAssembler implements RepresentationModelAssembler<P
 
     @Override
     public EntityModel<PropiedadesResponseDTO> toModel (PropiedadesResponseDTO dto){
-        return EntityModel.of(dto,
+        return EntityModel.of(
+                dto,
                 //enlace al recurso individual
-                linkTo(methodOn(PropiedadesController.class).getPorId(dto.getId())).withSelfRel(),
+                linkTo(methodOn(PropiedadesController.class)
+                        .getPorId(dto.getId()))
+                        .withSelfRel(),
 
                 //Enlace al listado completo de propiedades
-                linkTo(methodOn(PropiedadesController.class).getTodas()).withRel("propiedades"),
+                linkTo(methodOn(PropiedadesController.class)
+                        .getTodas())
+                        .withRel("propiedades"),
 
                 //Enlace extra dinamico para conmutar su estado de disponibilidad
-                linkTo(methodOn(PropiedadesController.class).cambiarEstado(dto.getId())).withRel("cambiar-estado")
+                linkTo(methodOn(PropiedadesController.class)
+                        .cambiarEstado(dto.getId()))
+                        .withRel("cambiar-estado")
                 );
     }
 }

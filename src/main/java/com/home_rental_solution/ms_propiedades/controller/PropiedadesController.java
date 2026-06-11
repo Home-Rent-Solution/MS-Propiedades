@@ -42,10 +42,7 @@ public class PropiedadesController {
             description = "Lista de propiedades recuperada con éxito",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                            schema = @Schema(
-                                    implementation = PropiedadesResponseDTO.class)
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getTodas() {
@@ -64,9 +61,7 @@ public class PropiedadesController {
                     description = "Propiedad encontrada exitosamente",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                            )
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
             @ApiResponse(
@@ -93,9 +88,7 @@ public class PropiedadesController {
                     description = "Propiedad creada correctamente",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                            )
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
             @ApiResponse(
@@ -125,9 +118,7 @@ public class PropiedadesController {
                     description = "Propiedad actualizada con éxito",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                            )
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
             @ApiResponse(
@@ -180,11 +171,7 @@ public class PropiedadesController {
             description = "Lista de propiedades del anfitrión devuelta con éxito",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                    )
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getPorAnfitrion(
@@ -209,11 +196,7 @@ public class PropiedadesController {
             description = "Resultados del filtro por rango de precios",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                    )
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getPorPrecio(
@@ -244,11 +227,7 @@ public class PropiedadesController {
             description = "Propiedades filtradas por tipo encontradas",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                    )
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getPorTipo(
@@ -272,11 +251,7 @@ public class PropiedadesController {
             description = "Lista de propiedades disponibles recuperada",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                    )
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getDisponibles() {
@@ -295,11 +270,7 @@ public class PropiedadesController {
             description = "Resultados que cumplen con los criterios de búsqueda compleja",
             content = @Content(
                     mediaType = "application/json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                    )
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public ResponseEntity<List<PropiedadesResponseDTO>> getUbicacionPrecio(
@@ -321,7 +292,12 @@ public class PropiedadesController {
                     required = true
             )
             @RequestParam BigDecimal precioMax) {
-        return ResponseEntity.ok(propiedadesService.mostrarUbicacionPrecio(ubicacion, precioMin, precioMax));
+        return ResponseEntity.ok(propiedadesService.mostrarUbicacionPrecio(
+                ubicacion,
+                precioMin,
+                precioMax
+            )
+        );
     }
 
     //PUT /propiedades/estado--para cambiar el estado
@@ -338,9 +314,7 @@ public class PropiedadesController {
                     description = "Estado de disponibilidad modificado correctamente",
                     content = @Content(
                             mediaType = "application/json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                            )
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
             @ApiResponse(

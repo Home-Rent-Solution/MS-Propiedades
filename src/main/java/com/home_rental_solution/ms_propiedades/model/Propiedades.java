@@ -31,9 +31,9 @@ public class Propiedades {
     )
     private String titulo;
 
-    @Column
-            (nullable = false,
-                    length = 500
+    @Column(
+            nullable = false,
+            length = 500
             )
     private String descripcion;
 

@@ -53,9 +53,7 @@ public class PropiedadesControllerV2 {
             description = "Lista de propiedades recuperada con éxito",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                            schema = @Schema(
-                                    implementation = PropiedadesResponseDTO.class)
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             )
     )
@@ -65,7 +63,13 @@ public class PropiedadesControllerV2 {
                 .stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
-        return CollectionModel.of(propiedades,linkTo(methodOn(PropiedadesControllerV2.class).getTodas()).withSelfRel());
+        return CollectionModel.of(
+                propiedades,
+                linkTo(methodOn(PropiedadesControllerV2
+                        .class)
+                        .getTodas())
+                        .withSelfRel()
+        );
     }
 
     //GET /propiedades/id
@@ -83,15 +87,16 @@ public class PropiedadesControllerV2 {
                     description = "Propiedad encontrada exitosamente",
                     content = @Content(
                             mediaType = "application/hal + json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class)
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
-            )
-                    ,@ApiResponse(
-                            responseCode = "400",
+            ),
+                    @ApiResponse(
+                    responseCode = "400",
                     description = "La propiedad solicitada no existe en el sistema",
-                    content = @Content)
-            })
+                    content = @Content
+                    )
+            }
+    )
 
     public EntityModel<PropiedadesResponseDTO> getPorId(@Parameter(
             description = "ID numerico de la propiedad a buscar",
@@ -111,24 +116,22 @@ public class PropiedadesControllerV2 {
                     " exista y se encuentre verificado en ms-anfitriones."
     )
     @ApiResponses(
-            value = {
-            @ApiResponse(
+            value = {@ApiResponse(
                     responseCode = "201",
                     description = "Propiedad creada correctamente",
                     content = @Content(
                             mediaType = "application/hal + json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class
-                            )
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
-            @ApiResponse(
+                    @ApiResponse(
                     responseCode = "400",
                     description = "Error de validación en los datos de entrada o el anfitrión no es válido/no está" +
                             " verificado",
                     content = @Content
-            )
-    })
+                    )
+            }
+    )
 
     public ResponseEntity<EntityModel<PropiedadesResponseDTO>> postPropiedad(
             @Valid @RequestBody PropiedadesRequestDTO dto) {
@@ -149,25 +152,27 @@ public class PropiedadesControllerV2 {
                     " se preservan de forma segura."
     )
     @ApiResponses(
-            value = {
-            @ApiResponse(
+            value = {@ApiResponse(
                     responseCode = "200",
                     description = "Propiedad actualizada con éxito",
                     content = @Content(
                             mediaType = "application/hal + json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class)
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
-            @ApiResponse(
+                    @ApiResponse(
                     responseCode = "400",
                     description = "ID no encontrado o datos de actualización inválidos",
                     content = @Content
-            )
-    })
+                    )
+            }
+    )
     public ResponseEntity<EntityModel<PropiedadesResponseDTO>> putPropiedad(
             @PathVariable Long id, @Valid @RequestBody PropiedadesRequestDTO dto) {
-        PropiedadesResponseDTO editadoDto = propiedadesService.editar(id, dto);
+        PropiedadesResponseDTO editadoDto = propiedadesService.editar(
+                id,
+                dto
+        );
         return ResponseEntity.ok(assembler.toModel(editadoDto));
     }
 
@@ -176,19 +181,24 @@ public class PropiedadesControllerV2 {
             value = "{id}",
             produces = MediaTypes.HAL_JSON_VALUE
     )
-    @Operation(summary = "Eliminar una propiedad", description = "Remueve permanentemente una propiedad del" +
-            " sistema de base de datos a través de su identificador único.")
+    @Operation(
+            summary = "Eliminar una propiedad",
+            description = "Remueve permanentemente una propiedad del sistema de base de datos a través de su" +
+                    " identificador único."
+    )
     @ApiResponses(
-            value = {
-            @ApiResponse(
+            value = {@ApiResponse(
                     responseCode = "204",
                     description = "Propiedad eliminada exitosamente (Sin contenido de retorno)",
-                    content = @Content),
-            @ApiResponse(
+                    content = @Content
+            ),
+                    @ApiResponse(
                     responseCode = "400",
                     description = "El ID de la propiedad especificada no existe",
-                    content = @Content)
-    })
+                    content = @Content
+                    )
+            }
+    )
 
     public ResponseEntity<Void> deletePropiedad(@PathVariable Long id) {
         propiedadesService.borrar(id);
@@ -212,8 +222,7 @@ public class PropiedadesControllerV2 {
             description = "Lista de propiedades del anfitrión devuelta con éxito",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             )
     )
@@ -247,9 +256,7 @@ public class PropiedadesControllerV2 {
             description = "Resultados del filtro por rango de precios",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public CollectionModel<EntityModel<PropiedadesResponseDTO>> getPorPrecio(
@@ -288,9 +295,7 @@ public class PropiedadesControllerV2 {
             description = "Propiedades filtradas por tipo encontradas",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public CollectionModel<EntityModel<PropiedadesResponseDTO>> getPorTipo(
@@ -322,9 +327,7 @@ public class PropiedadesControllerV2 {
             description = "Lista de propiedades disponibles recuperada",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public CollectionModel<EntityModel<PropiedadesResponseDTO>> getDisponibles() {
@@ -351,10 +354,7 @@ public class PropiedadesControllerV2 {
             description = "Resultados que cumplen con los criterios de búsqueda compleja",
             content = @Content(
                     mediaType = "application/hal + json",
-                    array = @ArraySchema(
-                    schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class)
-                    )
+                    array = @ArraySchema(schema = @Schema(implementation = PropiedadesResponseDTO.class))
             )
     )
     public CollectionModel<EntityModel<PropiedadesResponseDTO>> getUbicacionPrecio(
@@ -366,15 +366,21 @@ public class PropiedadesControllerV2 {
             @Parameter(
                     description = "Filtro de precio mínimo para la búsqueda",
                     example = "30.00",
-                    required = true)
+                    required = true
+            )
             @RequestParam BigDecimal precioMin,
             @Parameter(
                     description = "Filtro de precio máximo para la búsqueda",
                     example = "180.00",
-                    required = true)
+                    required = true
+            )
             @RequestParam BigDecimal precioMax) {
         List<EntityModel<PropiedadesResponseDTO>> propiedades = propiedadesService
-                .mostrarUbicacionPrecio(ubicacion, precioMin, precioMax)
+                .mostrarUbicacionPrecio(
+                        ubicacion,
+                        precioMin,
+                        precioMax
+                )
                 .stream()
                 .map(assembler::toModel)
                 .collect(Collectors.toList());
@@ -391,22 +397,22 @@ public class PropiedadesControllerV2 {
             description = "Invierte de forma dinámica el estado actual de la propiedad. Si estaba disponible (true)," +
                     " pasa a no disponible (false) y viceversa."
     )
-    @ApiResponses(value = {
-            @ApiResponse(
+    @ApiResponses(
+            value = {@ApiResponse(
                     responseCode = "200",
                     description = "Estado de disponibilidad modificado correctamente",
                     content = @Content(
                             mediaType = "application/hal + json",
-                            schema = @Schema(
-                            implementation = PropiedadesResponseDTO.class)
+                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
                     )
             ),
-            @ApiResponse(
+                    @ApiResponse(
                     responseCode = "400",
                     description = "El ID proporcionado no corresponde a ninguna propiedad activa",
                     content = @Content
-            )
-    })
+                    )
+            }
+    )
     public ResponseEntity<EntityModel<PropiedadesResponseDTO>> cambiarEstado(
             @Parameter(
                     description = "ID de la propiedad a la que se le conmutará la disponibilidad",
