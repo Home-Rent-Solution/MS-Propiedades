@@ -82,18 +82,19 @@ public class PropiedadesControllerV2 {
             description = "Busca y devuelve los detalles de una propiedad específica utilizando su identificador único."
     )
     @ApiResponses(
-            value = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Propiedad encontrada exitosamente",
-                    content = @Content(
-                            mediaType = "application/hal + json",
-                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
-            ),
+            value = {
                     @ApiResponse(
-                    responseCode = "400",
-                    description = "La propiedad solicitada no existe en el sistema",
-                    content = @Content
+                            responseCode = "200",
+                            description = "Propiedad encontrada exitosamente",
+                            content = @Content(
+                                    mediaType = "application/hal + json",
+                                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "La propiedad solicitada no existe en el sistema",
+                            content = @Content
                     )
             }
     )

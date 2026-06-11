@@ -55,21 +55,23 @@ public class PropiedadesController {
             summary = "Obtener una propiedad por ID",
             description = "Busca y devuelve los detalles de una propiedad específica utilizando su identificador único."
     )
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Propiedad encontrada exitosamente",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Propiedad encontrada exitosamente",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "La propiedad solicitada no existe en el sistema",
+                            content = @Content
                     )
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "La propiedad solicitada no existe en el sistema",
-                    content = @Content
-            )
-    })
+            }
+    )
     public ResponseEntity<PropiedadesResponseDTO> getPorId(@PathVariable Long id) {
         return ResponseEntity.ok(propiedadesService.mostrarPorId(id));
     }
@@ -83,21 +85,22 @@ public class PropiedadesController {
     )
     @ApiResponses(
             value = {
-            @ApiResponse(
-                    responseCode = "201",
-                    description = "Propiedad creada correctamente",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
-            ),
-            @ApiResponse(
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Propiedad creada correctamente",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            )
+                    ),
+                    @ApiResponse(
                     responseCode = "400",
-                    description = "Error de validación en los datos de entrada o el anfitrión no es válido/no está" +
-                            " verificado",
-                    content = @Content
-            )
-    })
+                            description = "Error de validación en los datos de entrada o el anfitrión no es válido/no" +
+                                    " está verificado",
+                            content = @Content
+                    )
+            }
+    )
     public ResponseEntity<PropiedadesResponseDTO> postPropiedad(@Valid @RequestBody PropiedadesRequestDTO dto) {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -113,23 +116,29 @@ public class PropiedadesController {
     )
     @ApiResponses(
             value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Propiedad actualizada con éxito",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
-                    )
-            ),
-            @ApiResponse(
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Propiedad actualizada con éxito",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            )
+                    ),
+                    @ApiResponse(
                     responseCode = "400",
-                    description = "ID no encontrado o datos de actualización inválidos",
-                    content = @Content
-            )
-    })
+                            description = "ID no encontrado o datos de actualización inválidos",
+                            content = @Content
+                    )
+            }
+    )
     public ResponseEntity<PropiedadesResponseDTO> putPropiedad(
-            @PathVariable Long id, @Valid @RequestBody PropiedadesRequestDTO dto) {
-        return ResponseEntity.ok(propiedadesService.editar(id, dto));
+            @PathVariable Long id,
+            @Valid @RequestBody PropiedadesRequestDTO dto
+    ){
+        return ResponseEntity.ok(propiedadesService.editar(
+                id,
+                dto)
+        );
     }
 
     //DELETE /propiedades/id
@@ -141,17 +150,18 @@ public class PropiedadesController {
     )
     @ApiResponses(
             value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Propiedad eliminada exitosamente (Sin contenido de retorno)",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "El ID de la propiedad especificada no existe",
-                    content = @Content
-            )
-    })
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Propiedad eliminada exitosamente (Sin contenido de retorno)",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "El ID de la propiedad especificada no existe",
+                            content = @Content
+                    )
+            }
+    )
     public ResponseEntity<Void> deletePropiedad(@PathVariable Long id) {
         propiedadesService.borrar(id);
         return ResponseEntity
@@ -309,20 +319,21 @@ public class PropiedadesController {
     )
     @ApiResponses(
             value = {
-            @ApiResponse(
-                    responseCode = "200",
+                    @ApiResponse(
+                            responseCode = "200",
                     description = "Estado de disponibilidad modificado correctamente",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = PropiedadesResponseDTO.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "El ID proporcionado no corresponde a ninguna propiedad activa",
+                            content = @Content
                     )
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "El ID proporcionado no corresponde a ninguna propiedad activa",
-                    content = @Content
-            )
-    })
+            }
+    )
     public ResponseEntity<PropiedadesResponseDTO> cambiarEstado(
             @Parameter(
                     description = "ID de la propiedad a la que se le conmutará la disponibilidad",
