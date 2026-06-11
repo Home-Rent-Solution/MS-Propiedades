@@ -321,7 +321,7 @@ public class PropiedadesController {
             value = {
                     @ApiResponse(
                             responseCode = "200",
-                    description = "Estado de disponibilidad modificado correctamente",
+                            description = "Estado de disponibilidad modificado correctamente",
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = PropiedadesResponseDTO.class)
