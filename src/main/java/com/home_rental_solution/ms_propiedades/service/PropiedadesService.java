@@ -91,6 +91,7 @@ public class PropiedadesService {
 
     //POST /propiedades
     public PropiedadesResponseDTO save (PropiedadesRequestDTO dto){
+        validarAnfitrion(dto.getIdAnfitrion());
         Propiedades nuevaPropiedad = mapToEntity(dto);
         return mapToDTO(propiedadesRepository.save(nuevaPropiedad));
     }
