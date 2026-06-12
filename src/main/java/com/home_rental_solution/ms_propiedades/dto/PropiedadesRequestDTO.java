@@ -25,7 +25,7 @@ public class PropiedadesRequestDTO {
             max = 150,
             message = "El nombre no puede superar los 150 caracteres"
     )
-    private String nombre;
+    private String titulo;
 
     @NotBlank(message = "La descripcion es obligatoria")
     @Size(

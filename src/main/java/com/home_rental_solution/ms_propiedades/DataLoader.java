@@ -28,13 +28,19 @@ public class DataLoader implements CommandLineRunner {
         Faker faker = new Faker();
         Random random = new Random();
         Propiedades.TipoPropiedad[] tipos = Propiedades.TipoPropiedad.values();
+        String[] comunas = {
+                "Las Condes", "Providencia", "Vitacura", "Lo Barnechea", "Ñuñoa", "La Reina",
+                "Santiago", "San Miguel", "Macul", "La Florida", "Puente Alto", "San Joaquín",
+                "Maipú", "Estación Central", "Pudahuel", "Quilicura", "Recoleta", "Independencia",
+                "Viña del Mar", "Valparaíso", "Concón", "Algarrobo", "Pucón", "Puerto Varas"
+        };
 
         //generamos 20 propiedades
         for (int i = 0; i < 20; i++){
             Propiedades propiedad = new Propiedades();
-            propiedad.setTitulo(faker.house().room() + "confortable en" + faker.address().streetName());
+            propiedad.setTitulo(faker.house().room() + " confortable en " + faker.address().streetName());
             propiedad.setDescripcion(faker.lorem().sentence(10));
-            propiedad.setUbicacion(faker.address().fullAddress());
+            propiedad.setUbicacion(faker.options().option(comunas));
             propiedad.setPrecio(BigDecimal.valueOf(faker.number().numberBetween(1000000, 100000000)));
             propiedad.setDisponible(faker.bool().bool());
             propiedad.setIdAnfitrion((long) faker.number().numberBetween(1, 15));

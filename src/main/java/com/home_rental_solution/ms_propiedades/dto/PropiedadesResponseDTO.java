@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class PropiedadesResponseDTO {
 
     private Long id;
-    private String nombre;
+    private String titulo;
     private String descripcion;
     private String ubicacion;
     private BigDecimal precio;

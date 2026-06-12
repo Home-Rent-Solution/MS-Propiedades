@@ -43,7 +43,7 @@ public class PropiedadesService {
     private Propiedades mapToEntity(PropiedadesRequestDTO dto){
         return new Propiedades(
                 null,
-                dto.getNombre(),
+                dto.getTitulo(),
                 dto.getDescripcion(),
                 dto.getUbicacion(),
                 dto.getPrecio(),
@@ -101,7 +101,7 @@ public class PropiedadesService {
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("La propiedad con ID: " + id + " no existe"));
         validarAnfitrion(dto.getIdAnfitrion());
-        propiedadExistente.setTitulo(dto.getNombre());
+        propiedadExistente.setTitulo(dto.getTitulo());
         propiedadExistente.setDescripcion(dto.getDescripcion());
         propiedadExistente.setUbicacion(dto.getUbicacion());
         propiedadExistente.setPrecio(dto.getPrecio());
