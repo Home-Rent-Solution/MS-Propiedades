@@ -1,4 +1,4 @@
-package com.home_rental_solution.ms_propiedades;
+package com.home_rental_solution.ms_propiedades.util;
 
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 

@@ -338,7 +338,16 @@ public class PropiedadesServiceTest {
     // Helper interno estático para evitar duplicar código de instanciación en los retornos de guardado
     private static class PropertiesMockBuilder {
         public Propiedades buildSaved(Long id, PropiedadesRequestDTO dto) {
-            return new Propiedades(id, dto.getTitulo(), dto.getDescripcion(), dto.getUbicacion(), dto.getPrecio(), dto.getIdAnfitrion(), dto.getTipo(), false);
+            return new Propiedades(
+                    id,
+                    dto.getTitulo(),
+                    dto.getDescripcion(),
+                    dto.getUbicacion(),
+                    dto.getPrecio(),
+                    dto.getIdAnfitrion(),
+                    dto.getTipo(),
+                    false
+            );
         }
     }
 
