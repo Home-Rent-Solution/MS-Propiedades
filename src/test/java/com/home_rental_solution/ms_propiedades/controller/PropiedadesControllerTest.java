@@ -18,9 +18,10 @@ import com.home_rental_solution.ms_propiedades.service.PropiedadesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.autoconfigure.*;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -30,13 +31,12 @@ import java.util.List;
 public class PropiedadesControllerTest {
 
     @Autowired
-    private MockMvc mockMvc; // Proporciona una manera de realizar peticiones HTTP en las pruebas
+    private MockMvc mockMvc;
 
-    @MockBean
-    private PropiedadesService propiedadesService; // Crea un mock del servicio de Propiedades
+    @MockitoBean
+    private PropiedadesService propiedadesService;
 
-    @Autowired
-    private ObjectMapper objectMapper; // Se usa para convertir objetos Java a JSON y viceversa
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private PropiedadesResponseDTO propiedadResponse;
     private PropiedadesRequestDTO propiedadRequest;
@@ -65,9 +65,7 @@ public class PropiedadesControllerTest {
         );
     }
 
-    // ==========================================
     // TESTS CRUD
-    // ==========================================
 
     @Test
     public void testGetTodas() throws Exception {
@@ -129,9 +127,7 @@ public class PropiedadesControllerTest {
         verify(propiedadesService, times(1)).borrar(1L);
     }
 
-    // ==========================================
     // TESTS MÉTODOS EXTRAS
-    // ==========================================
 
     @Test
     public void testGetPorAnfitrion() throws Exception {
