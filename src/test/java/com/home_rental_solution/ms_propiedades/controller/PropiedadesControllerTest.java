@@ -27,7 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.math.BigDecimal;
 import java.util.List;
 
-@WebMvcTest(PropiedadesController.class) // Indica que se está probando el controlador de Propiedades
+@WebMvcTest(PropiedadesController.class)
 public class PropiedadesControllerTest {
 
     @Autowired
