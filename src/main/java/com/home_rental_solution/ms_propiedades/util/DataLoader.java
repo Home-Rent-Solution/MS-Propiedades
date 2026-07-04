@@ -20,7 +20,6 @@ import java.util.Random;
 @Slf4j
 public class DataLoader implements CommandLineRunner {
 
-    @Autowired
     private final PropiedadesRepository propiedadesRepository;
 
     @Override
