@@ -1,11 +1,9 @@
 package com.home_rental_solution.ms_propiedades.service;
 
-import com.home_rental_solution.ms_propiedades.client.AnfitrionClient;
 import com.home_rental_solution.ms_propiedades.dto.PropiedadesRequestDTO;
 import com.home_rental_solution.ms_propiedades.dto.PropiedadesResponseDTO;
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
-import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +20,6 @@ public class PropiedadesService {
 
     @Autowired
     private final PropiedadesRepository propiedadesRepository;
-
-    @Autowired
-    private final AnfitrionClient anfitrionClient;
 
     //Mapeo Entidad -> ResponseDTO
     private PropiedadesResponseDTO mapToDTO(Propiedades propiedad){
@@ -54,24 +49,6 @@ public class PropiedadesService {
         );
     }
 
-    //Validacion con FeignClients
-    private void validarAnfitrion(Long idAnfitrion){
-        try{
-            boolean verificado = anfitrionClient.validarAnfitrion(idAnfitrion);
-            log.info(
-                    ">>> Anfitrion {} validado correctamente (Feign Client)",
-                    idAnfitrion
-            );
-            if (!verificado){
-                throw  new RuntimeException("El anfitrion con ID: " + idAnfitrion + " no esta verificado");
-            }
-        } catch (FeignException.NotFound e){
-            throw new RuntimeException("El anfitrion con ID: " + idAnfitrion + " no existe en ms-anfitriones");
-        } catch (FeignException e){
-            throw new RuntimeException("No se puede conectar con ms-anfitriones: " + e.getMessage());
-        }
-    }
-
     //***CRUD**
     //GET /propiedades
     public List<PropiedadesResponseDTO> mostrarPropiedades(){
@@ -92,7 +69,6 @@ public class PropiedadesService {
 
     //POST /propiedades
     public PropiedadesResponseDTO save (PropiedadesRequestDTO dto){
-        validarAnfitrion(dto.getIdAnfitrion());
         Propiedades nuevaPropiedad = mapToEntity(dto);
         return mapToDTO(propiedadesRepository.save(nuevaPropiedad));
     }
@@ -102,7 +78,6 @@ public class PropiedadesService {
         Propiedades propiedadExistente = propiedadesRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("La propiedad con ID: " + id + " no existe"));
-        validarAnfitrion(dto.getIdAnfitrion());
         propiedadExistente.setTitulo(dto.getTitulo());
         propiedadExistente.setDescripcion(dto.getDescripcion());
         propiedadExistente.setUbicacion(dto.getUbicacion());
