@@ -29,7 +29,6 @@ import java.math.BigDecimal;
         " de propiedades de alquiler")
 public class PropiedadesController {
 
-    @Autowired
     private final PropiedadesService propiedadesService;
 
     //***CRUD***
