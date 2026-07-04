@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PropiedadesService {
 
+    @Autowired
     private final PropiedadesRepository propiedadesRepository;
 
     @Autowired
