@@ -1,100 +1,48 @@
-# CONFIGURACIÃ“N BASE (ComÃºn para todos)
+server:
+  port: 8081
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: ms-propiedades
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+  flyway:
+    enabled: true
+
   cloud:
     openfeign:
       client:
         config:
           default:
-            connectTimeout: ${FEIGN_CONNECT_TIMEOUT:3000}
-            readTimeout: ${FEIGN_READ_TIMEOUT:5000}
-            loggerLevel: basic
+            connectTimeout: 3000
+            readTimeout: 5000
 
-server:
-  port: 8081
-  forward-headers-strategy: framework
+eureka:
+  client:
+    enabled: false
 
----
+ms:
+  anfitriones:
+    url: ${MS_ANFITRIONES_URL:http://localhost:8082}
 
-# PERFIL DE DESARROLLO (dev)
-
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-  # Base de datos MySQL de desarrollo
-  datasource:
-    url: jdbc:mysql://localhost:3306/db_propiedades_dev
-    username: root
-    password: ""
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  # Estrategia de Hibernate para desarrollo
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        format_sql: true
-
-# DocumentaciÃ³n interactiva con Swagger UI
 springdoc:
   api-docs:
     enabled: true
   swagger-ui:
     enabled: true
     path: /doc/swagger-ui.html
-
-
-# ENLACE CON LA TORRE DE CONTROL EUREKA
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    prefer-ip-address: true
-
----
-
-# PERFIL DE PRUEBAS (test)
-
-spring:
-  config:
-    activate:
-      on-profile: test
-
-  # Base de datos MySQL de pruebas
-  datasource:
-    url: jdbc:mysql://localhost:3306/db_propiedades_test
-    username: root
-    password: ""
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  # Limpieza absoluta de tablas en cada ejecuciÃ³n de test
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: false
-    hibernate:
-      ddl-auto: create-drop
-
-# Desactivar Swagger en tests para acelerar el arranque
-springdoc:
-  api-docs:
-    enabled: false
-  swagger-ui:
-    enabled: false
-
-# URL ficticia para simular llamadas Feign en ambiente de pruebas
-ms:
-  anfitriones:
-    url: http://localhost:9999
 
 
 
