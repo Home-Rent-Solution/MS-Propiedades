@@ -2,19 +2,24 @@ package com.home_rental_solution.ms_propiedades.config;
 
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 @Component
-@RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
 
     private final PropiedadesRepository propiedadesRepository;
+
+
+    @Autowired
+    public DataInitializer(PropiedadesRepository propiedadesRepository) {
+        this.propiedadesRepository = propiedadesRepository;
+    }
 
     @Override
     public void run(String... args){

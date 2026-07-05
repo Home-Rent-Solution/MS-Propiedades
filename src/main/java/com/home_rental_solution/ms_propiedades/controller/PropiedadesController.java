@@ -13,7 +13,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,13 +23,16 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/api/v1/propiedades")
-@RequiredArgsConstructor
 @Tag(name = "Propiedades", description = "Controlador principal para la gestión, filtros y búsquedas avanzadas" +
         " de propiedades de alquiler")
 public class PropiedadesController {
+    private final PropiedadesService propiedadesService;
+
 
     @Autowired
-    private final PropiedadesService propiedadesService;
+    public PropiedadesController(PropiedadesService propiedadesService) {
+        this.propiedadesService = propiedadesService;
+    }
 
     //***CRUD***
     //GET /propiedades

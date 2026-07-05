@@ -6,7 +6,6 @@ import com.home_rental_solution.ms_propiedades.dto.PropiedadesResponseDTO;
 import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
 import feign.FeignException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,14 +16,16 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class PropiedadesService {
-
-    @Autowired
     private final PropiedadesRepository propiedadesRepository;
+    private final AnfitrionClient anfitrionClient;
+
 
     @Autowired
-    private final AnfitrionClient anfitrionClient;
+    public PropiedadesService(PropiedadesRepository propiedadesRepository, AnfitrionClient anfitrionClient) {
+        this.propiedadesRepository = propiedadesRepository;
+        this.anfitrionClient = anfitrionClient;
+    }
 
     //Mapeo Entidad -> ResponseDTO
     private PropiedadesResponseDTO mapToDTO(Propiedades propiedad){

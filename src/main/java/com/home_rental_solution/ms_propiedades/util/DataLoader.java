@@ -5,7 +5,6 @@ import com.home_rental_solution.ms_propiedades.model.Propiedades;
 import lombok.extern.slf4j.Slf4j;
 import net.datafaker.Faker;
 import com.home_rental_solution.ms_propiedades.repository.PropiedadesRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
@@ -16,11 +15,16 @@ import java.util.Random;
 
 @Profile({"dev", "test"})
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class DataLoader implements CommandLineRunner {
 
     private final PropiedadesRepository propiedadesRepository;
+
+
+    @Autowired
+    public DataLoader(PropiedadesRepository propiedadesRepository) {
+        this.propiedadesRepository = propiedadesRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception{
