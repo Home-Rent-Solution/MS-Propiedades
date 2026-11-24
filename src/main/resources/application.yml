@@ -7,19 +7,15 @@ spring:
     name: ms-propiedades
 
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:mysql://localhost:3306/db_propiedades?createDatabaseIfNotExist=true}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: false
-
-  flyway:
-    enabled: true
 
   cloud:
     openfeign:
@@ -31,7 +27,9 @@ spring:
 
 eureka:
   client:
-    enabled: false
+    enabled: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
 
 ms:
   anfitriones:
@@ -43,7 +41,6 @@ springdoc:
   swagger-ui:
     enabled: true
     path: /doc/swagger-ui.html
-
 
 
 
