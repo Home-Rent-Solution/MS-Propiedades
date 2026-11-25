@@ -39,7 +39,8 @@ public class DataInitializer implements CommandLineRunner {
                 Propiedades
                         .TipoPropiedad
                         .departamento,
-                true
+                true,
+                null, null, null, null, null, null, false
         ));propiedadesRepository.save(new Propiedades(
                 null,
                 "Casa en Providencia",
@@ -50,7 +51,8 @@ public class DataInitializer implements CommandLineRunner {
                 Propiedades
                         .TipoPropiedad
                         .casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         ));propiedadesRepository.save(new Propiedades(
                 null,
                 "Casa en Maipú",
@@ -61,9 +63,10 @@ public class DataInitializer implements CommandLineRunner {
                 Propiedades
                         .TipoPropiedad
                         .terreno,
-                true
+                true,
+                null, null, null, null, null, null, false
         ));
         log.info(">>> DataInitializer: {} propiedades insertadas correctamente.",
-        propiedadesRepository.count());
+                propiedadesRepository.count());
     }
 }

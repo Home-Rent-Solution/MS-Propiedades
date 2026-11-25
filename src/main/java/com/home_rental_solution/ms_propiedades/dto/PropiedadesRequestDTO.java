@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -50,4 +51,27 @@ public class PropiedadesRequestDTO {
 
     @NotNull(message = "El tipo de propiedad es obligatorio")
     private TipoPropiedad tipo;
+
+    //campos nuevos: opcionales, pero si vienen deben ser validos
+    @Size(
+            max = 255,
+            message = "La ruta de la imagen no puede superar los 255 caracteres"
+    )
+    private String imagen;
+
+    @Positive(message = "La capacidad debe ser mayor a 0")
+    private Integer capacidad;
+
+    @Positive(message = "Las habitaciones deben ser mayor a 0")
+    private Integer habitaciones;
+
+    @Positive(message = "Los baños deben ser mayor a 0")
+    private Integer banos;
+
+    @Positive(message = "La superficie debe ser mayor a 0")
+    private Integer superficie;
+
+    private List<String> servicios;
+
+    private Boolean destacada;
 }

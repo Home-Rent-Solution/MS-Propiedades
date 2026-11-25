@@ -37,7 +37,14 @@ public class PropiedadesService {
                 propiedad.getPrecio(),
                 propiedad.getIdAnfitrion(),
                 propiedad.getTipo(),
-                propiedad.isDisponible()
+                propiedad.isDisponible(),
+                propiedad.getImagen(),
+                propiedad.getCapacidad(),
+                propiedad.getHabitaciones(),
+                propiedad.getBanos(),
+                propiedad.getSuperficie(),
+                propiedad.getServicios(),
+                propiedad.isDestacada()
         );
     }
 
@@ -51,7 +58,14 @@ public class PropiedadesService {
                 dto.getPrecio(),
                 dto.getIdAnfitrion(),
                 dto.getTipo(),
-                false
+                false,
+                dto.getImagen(),
+                dto.getCapacidad(),
+                dto.getHabitaciones(),
+                dto.getBanos(),
+                dto.getSuperficie(),
+                dto.getServicios(),
+                Boolean.TRUE.equals(dto.getDestacada())
         );
     }
 
@@ -110,6 +124,13 @@ public class PropiedadesService {
         propiedadExistente.setPrecio(dto.getPrecio());
         propiedadExistente.setIdAnfitrion(dto.getIdAnfitrion());
         propiedadExistente.setTipo(dto.getTipo());
+        propiedadExistente.setImagen(dto.getImagen());
+        propiedadExistente.setCapacidad(dto.getCapacidad());
+        propiedadExistente.setHabitaciones(dto.getHabitaciones());
+        propiedadExistente.setBanos(dto.getBanos());
+        propiedadExistente.setSuperficie(dto.getSuperficie());
+        propiedadExistente.setServicios(dto.getServicios());
+        propiedadExistente.setDestacada(Boolean.TRUE.equals(dto.getDestacada()));
         // disponible no se toca porque se maneja con PUT
         return mapToDTO(propiedadesRepository.save(propiedadExistente));
     }

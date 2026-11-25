@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -65,4 +66,28 @@ public class Propiedades {
 
     @Column(nullable = false)
     private boolean disponible = false;
+
+    private String imagen;
+
+    private Integer capacidad;
+
+    private Integer habitaciones;
+
+    private Integer banos;
+
+    private Integer superficie;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "propiedad_servicios",
+            joinColumns = @JoinColumn(name = "id_propiedad")
+    )
+    @Column(
+            name = "servicio",
+            length = 100
+    )
+    private List<String> servicios;
+
+    @Column(nullable = false)
+    private boolean destacada = false;
 }

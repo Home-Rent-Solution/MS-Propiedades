@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,11 @@ public class PropiedadesResponseDTO {
     private Long idAnfitrion;
     private Propiedades.TipoPropiedad tipo;
     private boolean disponible;
+    private String imagen;
+    private Integer capacidad;
+    private Integer habitaciones;
+    private Integer banos;
+    private Integer superficie;
+    private List<String> servicios;
+    private boolean destacada;
 }
