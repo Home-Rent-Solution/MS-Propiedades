@@ -16,10 +16,11 @@ import java.util.List;
 public class Propiedades {
 
     public enum TipoPropiedad{
-        casa,
         departamento,
-        terreno,
-        estudio
+        casa,
+        cabana,
+        loft,
+        parcela
     }
 
     @Id

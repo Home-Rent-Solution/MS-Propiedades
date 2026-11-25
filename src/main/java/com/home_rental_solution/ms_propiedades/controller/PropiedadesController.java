@@ -234,7 +234,7 @@ public class PropiedadesController {
     @Operation(
             summary = "Filtrar propiedades por tipo",
             description = "Obtiene una lista de propiedades que coincidan exactamente con el tipo de alojamiento" +
-                    " solicitado (ej. CASA, DEPARTAMENTO, HABITACION)."
+                    " solicitado: departamento, casa, cabana, loft o parcela."
     )
     @ApiResponse(
             responseCode = "200",

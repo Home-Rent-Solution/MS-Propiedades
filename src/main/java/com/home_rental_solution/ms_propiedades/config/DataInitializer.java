@@ -62,7 +62,7 @@ public class DataInitializer implements CommandLineRunner {
                 2L,
                 Propiedades
                         .TipoPropiedad
-                        .terreno,
+                        .casa,
                 true,
                 null, null, null, null, null, null, false
         ));
