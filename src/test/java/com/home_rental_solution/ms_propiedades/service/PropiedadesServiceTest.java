@@ -45,7 +45,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(45000000),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when (propiedadesRepository.findAll()).thenReturn(List.of(propiedades));
         List<PropiedadesResponseDTO> resultado = propiedadesService.mostrarPropiedades();
@@ -70,7 +71,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(500000000),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when(propiedadesRepository.findById(1L)).thenReturn(Optional.of(propiedad));
         PropiedadesResponseDTO resultado = propiedadesService.mostrarPorId(1L);
@@ -101,7 +103,8 @@ public class PropiedadesServiceTest {
                 "Centro",
                 BigDecimal.valueOf(150000000),
                 2L,
-                Propiedades.TipoPropiedad.casa
+                Propiedades.TipoPropiedad.casa,
+                null, null, null, null, null, null, false
         );
 
         Propiedades propiedadGuardada = new Propiedades(
@@ -112,7 +115,8 @@ public class PropiedadesServiceTest {
                 request.getPrecio(),
                 request.getIdAnfitrion(),
                 request.getTipo(),
-                false
+                false,
+                null, null, null, null, null, null, false
         );
 
         // Simular que el anfitrión es válido y que el repositorio guarda con éxito
@@ -135,7 +139,8 @@ public class PropiedadesServiceTest {
                 "Centro",
                 BigDecimal.valueOf(150000000),
                 2L,
-                Propiedades.TipoPropiedad.casa
+                Propiedades.TipoPropiedad.casa,
+                null, null, null, null, null, null, false
         );
 
         // Declaramos en el cliente de Feign que NO está verificado (false)
@@ -154,7 +159,8 @@ public class PropiedadesServiceTest {
                 "Centro",
                 BigDecimal.valueOf(150000000),
                 2L,
-                Propiedades.TipoPropiedad.casa
+                Propiedades.TipoPropiedad.casa,
+                null, null, null, null, null, null, false
         );
 
         // Simulamos un error 404 de Feign de manera limpia
@@ -176,7 +182,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(10),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         PropiedadesRequestDTO nuevosDatos = new PropiedadesRequestDTO(
                 "Nuevo",
@@ -184,7 +191,8 @@ public class PropiedadesServiceTest {
                 "Nueva Ubi",
                 BigDecimal.valueOf(20),
                 2L,
-                Propiedades.TipoPropiedad.casa
+                Propiedades.TipoPropiedad.casa,
+                null, null, null, null, null, null, false
         );
 
         when(propiedadesRepository.findById(1L)).thenReturn(Optional.of(propiedadExistente));
@@ -231,7 +239,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(50),
                 3L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when(propiedadesRepository.findByIdAnfitrion(3L)).thenReturn(List.of(p));
         List<PropiedadesResponseDTO> resultado = propiedadesService.mostrarPorAnfitrion(3L);
@@ -254,7 +263,8 @@ public class PropiedadesServiceTest {
                 "U1",
                 BigDecimal.valueOf(150),
                 2L, Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when(propiedadesRepository.findByPrecioBetween(
                 BigDecimal.valueOf(100),
@@ -307,7 +317,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(50),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when(propiedadesRepository.findByDisponibleTrue()).thenReturn(List.of(p));
         List<PropiedadesResponseDTO> resultado = propiedadesService.mostrarDisponibles();
@@ -325,7 +336,8 @@ public class PropiedadesServiceTest {
                 BigDecimal.valueOf(50),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
         when(propiedadesRepository.findById(1L)).thenReturn(Optional.of(propiedadInicial));
         when(propiedadesRepository.save(any(Propiedades.class)))
@@ -346,7 +358,8 @@ public class PropiedadesServiceTest {
                     dto.getPrecio(),
                     dto.getIdAnfitrion(),
                     dto.getTipo(),
-                    false
+                    false,
+                    null, null, null, null, null, null, false
             );
         }
     }

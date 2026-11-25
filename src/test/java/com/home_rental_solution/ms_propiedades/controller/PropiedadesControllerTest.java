@@ -52,7 +52,8 @@ public class PropiedadesControllerTest {
                 BigDecimal.valueOf(150000),
                 2L,
                 Propiedades.TipoPropiedad.casa,
-                true
+                true,
+                null, null, null, null, null, null, false
         );
 
         propiedadRequest = new PropiedadesRequestDTO(
@@ -61,7 +62,8 @@ public class PropiedadesControllerTest {
                 "Pichilemu",
                 BigDecimal.valueOf(150000),
                 2L,
-                Propiedades.TipoPropiedad.casa
+                Propiedades.TipoPropiedad.casa,
+                null, null, null, null, null, null, false
         );
     }
 
@@ -186,7 +188,8 @@ public class PropiedadesControllerTest {
         // Simulamos que al cambiar el estado, la propiedad cambia disponible a false
         PropiedadesResponseDTO propiedadModificada = new PropiedadesResponseDTO(
                 1L, "Casa de Playa", "Hermosa vista al mar", "Pichilemu",
-                BigDecimal.valueOf(150000), 2L, Propiedades.TipoPropiedad.casa, false
+                BigDecimal.valueOf(150000), 2L, Propiedades.TipoPropiedad.casa, false,
+                null, null, null, null, null, null, false
         );
 
         when(propiedadesService.cambiarEstado(1L)).thenReturn(propiedadModificada);
